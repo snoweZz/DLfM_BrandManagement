@@ -8,7 +8,8 @@ def index():
     if request.method == "POST":
         brandname = request.form["brandname"]
         return render_template("index.html", brandname=brandname)
-    return render_template("index.html")
+    else:
+        return render_template("index.html")
 
 
 if __name__ == "__main__":
