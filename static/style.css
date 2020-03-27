@@ -1,3 +1,33 @@
-h1{
-    color: red;
+html, body{
+    background-color: darkgrey;
+    height: 100%;
+    width: 100%;
+}
+
+.container-fluid{
+    text-align: center;
+    height: 100%;
+}
+
+.row{
+    height: 100%;
+}
+
+.left{
+    /*background-color: blue;
+    opacity: 0.5;*/
+}
+
+.middle{
+    /*background-color: green;
+    opacity: 0.5;*/
+}
+
+.right{
+    /*background-color: yellow;
+    opacity: 0.5;*/
+}
+
+.btn{
+    border-width: thick;
 }

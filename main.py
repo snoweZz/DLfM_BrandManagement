@@ -1,13 +1,11 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
 
 @app.route("/")
 def index():
-    a = 3
-    b = 5
-    res = a+b
+    res = 'Predict'
     return render_template("index.html", res=res)
 
 
