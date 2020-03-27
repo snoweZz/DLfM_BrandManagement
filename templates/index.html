@@ -12,7 +12,17 @@
         <div class="row">
             <div class="col-sm left"></div>
             <div class="col-sm middle">
-                <button type="button" class="btn btn-outline-primary">{{res}}</button>
+                <div class="container-fluid">
+                    <div class="row predict">
+                        <form method="post" action="#">
+                            <input type="text" name="brandname" placeholder="Enter a brand name">
+                            <input type="submit" value="Predict">
+                        </form>
+                    </div>
+                    <div class="row display">
+                        <p>Your brandname is: {{brandname}}</p>
+                    </div>
+                </div>
             </div>
             <div class="col-sm right"></div>
         </div>

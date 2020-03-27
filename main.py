@@ -1,12 +1,14 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
 
-@app.route("/")
+@app.route("/", methods=["POST", "GET"])
 def index():
-    res = 'Predict'
-    return render_template("index.html", res=res)
+    if request.method == "POST":
+        brandname = request.form["brandname"]
+        return render_template("index.html", brandname=brandname)
+    return render_template("index.html")
 
 
 if __name__ == "__main__":

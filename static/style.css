@@ -28,6 +28,14 @@ html, body{
     opacity: 0.5;*/
 }
 
-.btn{
-    border-width: thick;
+.predict{
+    background-color: purple;
+    opacity: 0.5;
+    height: 50%;
 }
+.display{
+    background-color: pink;
+    opacity: 0.5;
+    height: 50%;
+}
+
