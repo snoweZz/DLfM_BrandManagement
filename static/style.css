@@ -1,5 +1,5 @@
 html, body{
-    background-color: darkgrey;
+    background-color: #373333;
     height: 100%;
     width: 100%;
 }
@@ -29,13 +29,26 @@ html, body{
 }
 
 .predict{
-    background-color: purple;
+    /*background-color: purple;*/
     opacity: 0.5;
     height: 50%;
 }
-.display{
-    background-color: pink;
-    opacity: 0.5;
-    height: 50%;
+
+.form{
+    width: 100%;
 }
+.btn.btn-outline-primary{
+    margin: 2.5%;
+    width: 50%;
+    color: #f0ad0d;
+    border-color: #f0ad0d;
+}
+.btn.btn-outline-primary:hover{
+    margin: 2.5%;
+    width: 50%;
+    color: #373333;
+    border-color: #f0ad0d;
+    background-color: #f0ad0d;
+}
+
 
