@@ -1,0 +1,17 @@
+# path to train_val.proto file
+net: "/home/ll2605/research/brandperception/revision2/finetune/train_caffe_model/flickr_data_multilabel/80train10val10test/finetune_imagenet/train_val.prototxt"
+test_iter: 33
+test_interval: 100
+# lr for fine-tuning should be lower than when starting from scratch
+base_lr: 0.0001
+lr_policy: "step"
+gamma: 0.1
+stepsize: 5000
+display: 20
+max_iter: 10000
+momentum: 0.9
+weight_decay: 0.0005
+snapshot: 100
+snapshot_prefix: "/scratch/ll2605/caffemodel/models/multilabel_flickr/80train10val10test/imagenet_tunelr0001_step5000_multilabel_10000"
+# uncomment the following to default to CPU mode solving
+# solver_mode: CPU
