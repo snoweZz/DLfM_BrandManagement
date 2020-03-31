@@ -1,6 +1,6 @@
-# DLfM_BrandManagement
+# Deep Learning for Marketing - Brand Management project
 
-The goad of this project is to replicate another project called 'Visual Listening' that compares how brands are perceived via images found on social media. 
+The goal of this project is to replicate another project called 'Visual Listening' that compares how brands are perceived via images found on social media. 
 In our project, the target is to build a webtool where the user can enter a brand, for example 'swatch', and receive a webpage that analysis swatch-images - found on Instagram on either 
 the official swatch user-profile or as #swatch hashtag on images from different users - and gives out the probability of these images being perceived as either 'glamourous', 'rugged', 'healthy' or 'fun' (four categories). 
 
