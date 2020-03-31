@@ -110,7 +110,7 @@ We use [Github Desktop](https://desktop.github.com/) for versioning. For the ver
 
 * **Vince Rueegge**
 * **Neeraj Kumar**
-* **Theebana Rajendram **
+* **Theebana Rajendram**
 * **Linda Samsinger** 
 
 
