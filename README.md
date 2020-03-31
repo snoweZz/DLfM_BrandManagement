@@ -1,5 +1,4 @@
-# Course: Deep Learning for Marketing 
-# Project: Brand Management 
+# Deep Learning for Marketing - Brand Management 
 
 The goal of this project is to replicate another project called 'Visual Listening' that compares how brands are perceived via images found on social media. 
 In our project, the target is to build a webtool where the user can enter a brand, for example 'swatch', and receive a webpage that analysis swatch-images - found on Instagram on either 
