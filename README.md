@@ -5,7 +5,7 @@ In our project, the target is to build a webtool where the user can enter a bran
 the official swatch user-profile or as #swatch hashtag on images from different users - and gives out the probability of these images being perceived as either 'glamourous', 'rugged', 'healthy' or 'fun' (four categories). 
 
 ## Getting Started
-
+```
 1. download Github Desktop 
 2. install Github Desktop 
 3. go to Github repository: https://github.com/snoweZz/DLfM_BrandManagement
@@ -20,7 +20,7 @@ or you can also open and work on the project from spider, pycharm etc. by going 
 10. afterwards, open github Desktop, you will see all changes there, they were tracked
 11. commit changes: write in 5-10 words what changes you made in the 'summary' box, then hit 'commit to Thibi-branch' 
 12. press 'push to origin' to upload all changes to the remote online Github repo https://github.com/snoweZz/DLfM_BrandManagement
-
+```
 ### Repository
 
 The folder structure of this repository is based on the following folders: 
@@ -61,16 +61,11 @@ to download images from Flickr, you need to install:
   export JAVA_HOME=~/jdk1.8.0_131
 
 ```
+```
 to download images from Instagram, you need to run the following Jupyter notebooks 
 
 - 01. Get_BrandNames_For_Images_Instagram
 - 02. Get_Images_From_Instagram
-```
-
-And repeat
-
-```
-until finished
 ```
 
 End with an example of getting some data out of the system or using it for a little demo
