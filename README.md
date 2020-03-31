@@ -104,7 +104,7 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+We use [Github Desktop](https://desktop.github.com/) for versioning. For the versions available, see the branches of each group member. 
 
 ## Authors
 
@@ -122,6 +122,5 @@ This project is licensed under the UZH License - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* Code used from "Visual Listening" project 
+
