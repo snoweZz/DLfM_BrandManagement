@@ -4,6 +4,3 @@
 other_project/*
 data/instagram_images/*
 model/*
-
-# specific file
-demo_model.h5
