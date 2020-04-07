@@ -8,7 +8,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
-
+# small comment for merge
 app = Flask(__name__)
 model = load_model('model/demo_model.h5')
 
