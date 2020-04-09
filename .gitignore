@@ -4,3 +4,7 @@
 other_project/*
 data/instagram_images/*
 model/*
+
+# Files #
+###########
+demo_model.h5
