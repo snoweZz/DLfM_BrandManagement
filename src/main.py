@@ -13,6 +13,7 @@ import requests
 
 app = Flask(__name__)
 model = load_model('model/demo_model.h5')
+
 #not working --> same error in JN
 def data_collection(user_input):
     url = 'https://www.instagram.com/'+user_input+'/?hl=en'
