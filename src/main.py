@@ -13,16 +13,10 @@ import requests
 
 app = Flask(__name__)
 model = load_model('model/demo_model.h5')
-<<<<<<< HEAD
 
-
-def data_collection(brandname):
-    url = 'https://www.instagram.com/'+brandname+'/?hl=en'
-=======
 #not working --> same error in JN
 def data_collection(user_input):
     url = 'https://www.instagram.com/'+user_input+'/?hl=en'
->>>>>>> parent of caf3388... image converter (no disksaving)
     scraper = instagram_scraper.InstagramScraper()
     official_images = scraper.profile_page_posts(url)
     print('Instagram page: ', url)
