@@ -15,7 +15,7 @@ app = Flask(__name__)
 model = load_model('model/demo_model.h5')
 <<<<<<< HEAD
 
-#merge comment
+
 def data_collection(brandname):
     url = 'https://www.instagram.com/'+brandname+'/?hl=en'
 =======
