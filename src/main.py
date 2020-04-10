@@ -13,22 +13,16 @@ import requests
 
 app = Flask(__name__)
 model = load_model('model/demo_model.h5')
-<<<<<<< HEAD
 
 #merge comment
 def data_collection(brandname):
     url = 'https://www.instagram.com/'+brandname+'/?hl=en'
-=======
-#not working --> same error in JN
-def data_collection(user_input):
-    url = 'https://www.instagram.com/'+user_input+'/?hl=en'
->>>>>>> parent of caf3388... image converter (no disksaving)
     scraper = instagram_scraper.InstagramScraper()
     official_images = scraper.profile_page_posts(url)
     print('Instagram page: ', url)
     print('Posts on Instagram profile page: ', len(official_images))
     print('Second image url on instagram profile: ', official_images[1]['display_url'])
-    return user_input
+    return brandname # return official_images
 
 
 def data_preprocessing(instagram_images):
@@ -42,7 +36,7 @@ def make_prediction(preprocessed_data):
 @app.route("/", methods=["POST", "GET"])
 def index():
     if request.method == "POST":
-        brandname = str(request.form["brandname"])
+        brandname = request.form["brandname"]
         return redirect(url_for("predict", brandname=brandname))
     else:
         return render_template("index.html")
