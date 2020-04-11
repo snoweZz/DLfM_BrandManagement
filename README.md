@@ -39,6 +39,10 @@ to download images from Flickr, you need to install
 - Linux on Windows
 - Java on Linux 
 ```
+```
+to feed the model, unzip the mode savemodels.7z 
+- 7z free download
+```
 
 ### Installing
 
