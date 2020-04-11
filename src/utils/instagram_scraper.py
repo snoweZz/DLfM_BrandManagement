@@ -59,7 +59,18 @@ class InstagramScraper:
         soup = BeautifulSoup(html, 'html.parser')
         body = soup.find('body')
         script_tag = body.find('script')
-        raw_string = script_tag.text.strip().replace('window._sharedData =', '').replace(';', '')
+        # pprint(script_tag)
+        # print('\n')
+        # pprint(type(script_tag))
+        content = script_tag.contents  # .strip().replace('window._sharedData =', '').replace(';', '')
+        #######
+        content_string = ''.join(content)
+        raw_string = content_string.strip().replace('window._sharedData =', '').replace(';', '')
+        #######
+        # print('\n')
+        # pprint(raw_string)
+        # print('\n')
+        # pprint(type(raw_string))
         return json.loads(raw_string)
 
     def profile_page_metrics(self, profile_url):
@@ -121,7 +132,9 @@ class InstagramScraper:
         results = []
         try:
             response = self.__request_url(profile_url)
+            # pprint(response)
             json_data = self.extract_json_data(response)
+            # pprint(json_data)
             metrics = json_data['entry_data']['ProfilePage'][0]['graphql']['user']['edge_owner_to_timeline_media'][
                 "edges"]
             # pprint(metrics)
