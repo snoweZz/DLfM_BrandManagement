@@ -8,3 +8,4 @@ model/*
 # Files #
 ###########
 demo_model.h5
+*.h5
