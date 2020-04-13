@@ -1,29 +1,34 @@
 from flask import Flask, render_template, request, redirect, url_for
 import pandas as pd
-import numpy as np
 import tensorflow as tf
-import keras
 from keras.models import load_model
-from sklearn.preprocessing import StandardScaler
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
+from keras.backend import set_session
 from src.utils import instagram_scraper
 from src.utils import image_preprocessing
 from src.utils import label_encoding
-import requests
+from src.utils import overall_class_label
 from sklearn.preprocessing import LabelEncoder
 
+global sess
+global graph
+sess = tf.Session()
+graph = tf.get_default_graph()
+set_session(sess)
+num_attributes = 4
+model = [[] for i in range(num_attributes)]
+model[0] = load_model('./model/savemodels/glamorous_model.h5')
+model[1] = load_model('./model/savemodels/rugged_model.h5')
+model[2] = load_model('./model/savemodels/fun_model.h5')
+model[3] = load_model('./model/savemodels/healthy_model.h5')
+
+
 app = Flask(__name__)
-model = load_model('model/demo_model.h5')
+
 
 def data_collection(brandname):
     url = 'https://www.instagram.com/'+brandname+'/?hl=en'
     scraper = instagram_scraper.InstagramScraper()
     official_images = scraper.profile_page_posts(url)
-    #print('Instagram page: ', url)
-    #print('Posts on Instagram profile page: ', len(official_images))
-    #print('Second image url on instagram profile: ', official_images[1]['display_url'])
     return official_images
 
 
@@ -33,21 +38,21 @@ def data_preprocessing(official_images):
 
 
 def make_prediction(preprocessed_data):
-    print('model type: {}'.format(type(model)))
-    print('model summary: {}'.format(model.summary()))
     X_test = preprocessed_data
-    print('X_test shape: {}'.format(X_test.shape))
-    print('X_test type: {}'.format(type(X_test)))
-    y_pred = model.predict(X_test) # Crashes here
-    print('y_pred: {}'.format(y_pred))
+
+    with graph.as_default():
+        set_session(sess)
+        y_pred = [[] for i in range(num_attributes)]
+        for i in range(num_attributes):
+            y_pred[i] = model[i].predict(X_test)
+        y_pred_label = overall_class_label.give_ovr_class_label_output(y_pred)
+
     # convert from encoded label to label name
-    label_encoder = LabelEncoder()
-    y_pred = label_encoding.probabilty_to_classencoding(y_pred)
-    y_pred = label_encoding.binary_class_to_label(y_pred)
+    # label_encoder = LabelEncoder() never used?
     # encoded label
-    y_pred_lst = y_pred.tolist()
+    y_pred_lst = y_pred_label.tolist()
     # map back to original label name
-    code2label = {0: 'fun', 1: 'glamarous', 2: 'healthy', 3: 'negative'}
+    code2label = {0: 'glamorous', 1: 'rugged', 2: 'fun', 3: 'healthy'}
     y_pred_lbnm = map(code2label.get, y_pred_lst)
     y_pred_lbnm = list(y_pred_lbnm)
     prediction = pd.Series(y_pred_lbnm).value_counts()
