@@ -19,6 +19,8 @@ import numpy as np
 import requests
 from bs4 import BeautifulSoup
 
+# TODO: for inofficial instagram page 
+# TODO: without saving on PC, display image in IDE 
 
 # set directory 
 directory= r"C:\Users\lsamsi\Documents\GitHub\DLfM_BrandManagement\data\instagram_images\nestle"
