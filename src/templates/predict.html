@@ -8,9 +8,32 @@
 </head>
 
 <body>
-   <h1>{{prediction}}</h1>
-
-
+    <div class="container-fluid">
+        <div class="row top"></div>
+        <div class="row middle">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <div class="row">
+                    <div class="col-sm-6 official">
+                        Total Official: {{total_official}}
+                        fun: {{prediction_official.count('fun')}}
+                        glamorous: {{prediction_official.count('glamorous')}}
+                        healthy: {{prediction_official.count('healthy')}}
+                        rugged: {{prediction_official.count('rugged')}}
+                    </div>
+                    <div class="col-sm-6 unofficial">
+                        Total Unofficial: {{total_unofficial}}
+                        fun: {{prediction_unofficial.count('fun')}}
+                        glamorous: {{prediction_unofficial.count('glamorous')}}
+                        healthy: {{prediction_unofficial.count('healthy')}}
+                        rugged: {{prediction_unofficial.count('rugged')}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+        <div class="row bottom"></div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
