@@ -50,9 +50,9 @@ api = Client(user_name, password)
 
 # all images urls 
 all_hash_image_posts_urls = []
-flat_hash_image_posts_urls = [item for sublist in all_hash_image_posts_urls for item in sublist]
+
 next_max_id = None
-while (api.feed_tag(HASHTAG, api.generate_uuid())["more_available"] == True) and (len(flat_hash_image_posts_urls) <= LIMIT_IMAGE_COUNT): 
+while (api.feed_tag(HASHTAG, api.generate_uuid())["more_available"] == True) and (len([item for sublist in all_hash_image_posts_urls for item in sublist]) <= LIMIT_IMAGE_COUNT): 
     if next_max_id == None: 
         #Gets the first 12 posts
         posts = api.feed_tag(HASHTAG, api.generate_uuid())
@@ -83,7 +83,7 @@ while (api.feed_tag(HASHTAG, api.generate_uuid())["more_available"] == True) and
         all_hash_image_posts_urls.append(next_image_urls)
         
 
-
+flat_hash_image_posts_urls = [item for sublist in all_hash_image_posts_urls for item in sublist]
 print(f"A total of {len(flat_hash_image_posts_urls)} image post urls were retrieved from the Instagram page.")
 
 #%%
@@ -91,9 +91,9 @@ print(f"A total of {len(flat_hash_image_posts_urls)} image post urls were retrie
 
 # all images urls 
 all_image_posts_urls = []
-flat_image_posts_urls = [item for sublist in all_image_posts_urls for item in sublist]
+
 next_max_id = None
-while (api.username_feed(USERNAME, max_id = next_max_id)["more_available"] == True)  and (len(flat_image_posts_urls) <= LIMIT_IMAGE_COUNT): 
+while (api.username_feed(USERNAME, max_id = next_max_id)["more_available"] == True)  and (len([item for sublist in all_image_posts_urls for item in sublist]) <= LIMIT_IMAGE_COUNT): 
     if next_max_id == None: 
         #Gets the first 12 posts
         posts = api.username_feed(USERNAME)
@@ -121,7 +121,7 @@ while (api.username_feed(USERNAME, max_id = next_max_id)["more_available"] == Tr
         all_image_posts_urls.append(next_image_urls)
         
 
-
+flat_image_posts_urls = [item for sublist in all_image_posts_urls for item in sublist]
 print(f"A total of {len(flat_image_posts_urls)} image post urls were retrieved from the Instagram page.")
 
 
