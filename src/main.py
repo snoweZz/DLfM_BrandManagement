@@ -25,16 +25,19 @@ model[3] = load_model('./model/savemodels/healthy_model.h5')
 app = Flask(__name__)
 
 
-def data_collection(brandname):
-    url = 'https://www.instagram.com/'+brandname+'/?hl=en'
+def data_collection(official, unofficial):
+    url_official = official
+    url_unofficial = 'https://www.instagram.com/explore/tags/'+unofficial+''
     scraper = instagram_scraper.InstagramScraper()
-    official_images = scraper.profile_page_posts(url)
-    return official_images
+    official_images = scraper.profile_page_posts(url_official)
+    unofficial_images = scraper.hashtag_page_posts(url_unofficial)
+    return official_images, unofficial_images
 
 
-def data_preprocessing(official_images):
-    preprocessed_data = image_preprocessing.preprocessing(official_images)
-    return preprocessed_data
+def data_preprocessing(official_images, unofficial_images):
+    preprocessed_data_official = image_preprocessing.preprocessing(official_images)
+    preprocessed_data_unofficial = image_preprocessing.preprocessing(unofficial_images)
+    return preprocessed_data_official, preprocessed_data_unofficial
 
 
 def make_prediction(preprocessed_data):
@@ -55,25 +58,32 @@ def make_prediction(preprocessed_data):
     code2label = {0: 'glamorous', 1: 'rugged', 2: 'fun', 3: 'healthy'}
     y_pred_lbnm = map(code2label.get, y_pred_lst)
     y_pred_lbnm = list(y_pred_lbnm)
-    prediction = pd.Series(y_pred_lbnm).value_counts()
-    return prediction
+    #print(y_pred_lbnm)
+    prediction = y_pred_lbnm#pd.Series(y_pred_lbnm).value_counts()
+    total = len(prediction)
+    return prediction, total
 
 
 @app.route("/", methods=["POST", "GET"])
 def index():
     if request.method == "POST":
-        brandname = request.form["brandname"]
-        return redirect(url_for("predict", brandname=brandname))
+        official = request.form["official"]
+        unofficial = request.form["unofficial"]
+        return redirect(url_for("predict", official=official, unofficial=unofficial))
     else:
         return render_template("index.html")
 
 
-@app.route("/predict/<brandname>", methods=["POST", "GET"])
-def predict(brandname):
-    official_images = data_collection(brandname)
-    preprocessed_data = data_preprocessing(official_images)
-    prediction = make_prediction(preprocessed_data)
-    return render_template("predict.html", prediction=prediction)
+@app.route("/predict/", methods=["POST", "GET"])
+def predict():
+    official = request.args.get('official')
+    unofficial = request.args.get('unofficial')
+    official_images, unofficial_images = data_collection(official, unofficial)
+    preprocessed_data_official, preprocessed_data_unofficial = data_preprocessing(official_images, unofficial_images)
+    prediction_official, total_official = make_prediction(preprocessed_data_official)
+    prediction_unofficial, total_unofficial = make_prediction(preprocessed_data_unofficial)
+    return render_template("predict.html", prediction_official=prediction_official, total_official=total_official,
+                           prediction_unofficial=prediction_unofficial, total_unofficial=total_unofficial)
 
 
 if __name__ == "__main__":

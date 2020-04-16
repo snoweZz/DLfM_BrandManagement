@@ -3,52 +3,45 @@ html, body{
     height: 100%;
     width: 100%;
 }
-
 .container-fluid{
     text-align: center;
     height: 100%;
 }
-
 .row{
     height: 100%;
 }
-
-.left{
-    /*background-color: blue;
-    opacity: 0.5;*/
-}
-
-.middle{
-    /*background-color: green;
-    opacity: 0.5;*/
-}
-
-.right{
-    /*background-color: yellow;
-    opacity: 0.5;*/
-}
-
-.predict{
+.top, .bottom{
+    height: 15%;
     /*background-color: purple;*/
-    opacity: 0.5;
-    height: 50%;
 }
-
+.middle{
+    height: 70%;
+}
 .form{
-    width: 100%;
+    padding-top: 15%;
+}
+.form-control{
+    opacity: 0.5;
+    margin: 1%;
 }
 .btn.btn-outline-primary{
-    margin: 2.5%;
     width: 50%;
+    height: 20%;
     color: #f0ad0d;
     border-color: #f0ad0d;
 }
 .btn.btn-outline-primary:hover{
-    margin: 2.5%;
     width: 50%;
+    height: 20%;
     color: #373333;
     border-color: #f0ad0d;
     background-color: #f0ad0d;
 }
 
-
+/* for the predict page */
+.col-sm-6.official{
+    background-color: red;
+}
+.col-sm-6.unofficial{
+    background-color: green;
+}
