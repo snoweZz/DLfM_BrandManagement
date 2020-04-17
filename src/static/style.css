@@ -37,11 +37,25 @@ html, body{
     border-color: #f0ad0d;
     background-color: #f0ad0d;
 }
+.btn.btn-outline-primary:active:focus{
+    width: 50%;
+    height: 20%;
+    color: #373333;
+    border-color: #f0ad0d;
+    background-color: #f0ad0d;
+    box-shadow: none !important;
+    opacity: 0.5;
+    outline: none !important;
+}
 
 /* for the predict page */
-.col-sm-6.official{
-    background-color: red;
+.absolute{
+    height: 50%;
 }
-.col-sm-6.unofficial{
-    background-color: green;
+.relative{
+    height: 50%;
+}
+h1{
+    padding-top: 2.5%;
+    color: #f0ad0d;
 }
