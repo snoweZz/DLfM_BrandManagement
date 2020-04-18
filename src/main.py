@@ -17,10 +17,10 @@ graph = tf.get_default_graph()
 set_session(sess)
 num_attributes = 4
 model = [[] for i in range(num_attributes)]
-model[0] = load_model('./model/savemodels/glamorous_model.h5')
-model[1] = load_model('./model/savemodels/rugged_model.h5')
-model[2] = load_model('./model/savemodels/fun_model.h5')
-model[3] = load_model('./model/savemodels/healthy_model.h5')
+model[0] = load_model('../model/savemodels/glamorous_model.h5')
+model[1] = load_model('../model/savemodels/rugged_model.h5')
+model[2] = load_model('../model/savemodels/fun_model.h5')
+model[3] = load_model('../model/savemodels/healthy_model.h5')
 
 
 app = Flask(__name__)
