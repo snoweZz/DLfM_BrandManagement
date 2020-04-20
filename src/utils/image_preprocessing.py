@@ -9,10 +9,12 @@ target_size = (300, 300)
 
 
 def preprocessing(results):
-    images_list = []
+    predict_images_list = []
+    view_images_list = []
     for result in range(len(results)):
+        #print('result: {}'.format(result))
         # get the image based on the 'display_url'
-        response = requests.get(results[result]['display_url'], stream=True)
+        response = requests.get(results[result], stream=True)    #['display_url'], stream=True)
         # convert it into a bytes object
         bytes = BytesIO(response.content)
         # convert it into an Image object
@@ -27,10 +29,10 @@ def preprocessing(results):
         train_image = np.array(train_image)
         #print(train_image.shape)
 
-        images_list.append(train_image)
+        predict_images_list.append(train_image)
 
     # convert the images_list into one numpy array (used as X_test for the model)
-    images_np = np.stack(images_list, axis=0)
+    images_np = np.stack(predict_images_list, axis=0)
     #print(images_np.shape)
     return images_np
 

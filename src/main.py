@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 import pandas as pd
 import tensorflow as tf
 from keras.models import load_model
@@ -7,7 +7,9 @@ from src.utils import instagram_scraper
 from src.utils import image_preprocessing
 from src.utils import label_encoding
 from src.utils import overall_class_label
+from src.utils import infinite_scraper
 from sklearn.preprocessing import LabelEncoder
+from PIL import Image
 
 # sessions and default graphs are needed to make tensorflow work properly
 global sess
@@ -30,11 +32,20 @@ app = Flask(__name__)
 # url_official is the official instagram page url of the brand to be analysed
 # url_unofficial is the hashtag instagram page url we want to compare to the official page
 def data_collection(official, unofficial):
-    url_official = official
-    url_unofficial = 'https://www.instagram.com/explore/tags/'+unofficial+''
-    scraper = instagram_scraper.InstagramScraper()
-    official_images = scraper.profile_page_posts(url_official)
-    unofficial_images = scraper.hashtag_page_posts(url_unofficial)
+    #url_official = official #official
+    #url_unofficial = unofficial #'https://www.instagram.com/explore/tags/'+unofficial+''
+
+    # specify number of images to retrieve
+    LIMIT_IMAGE_COUNT = 72
+    # specify your 'personal' instagram page, needed to get access to the API
+    user_name = 'chenpeling@hotmail.com'
+    password = 'Instagram2020'
+    official_images = infinite_scraper.official(user_name, password, LIMIT_IMAGE_COUNT, official)
+    unofficial_images = infinite_scraper.unofficial(user_name, password, LIMIT_IMAGE_COUNT, unofficial)
+
+    #scraper = instagram_scraper.InstagramScraper()
+    #official_images = scraper.profile_page_posts(url_official)
+    #unofficial_images = scraper.hashtag_page_posts(url_unofficial)
     return official_images, unofficial_images
 
 
@@ -117,6 +128,11 @@ def predict():
                            ho=healthy_official, hu=healthy_unofficial, ho_rel=healthy_official_rel, hu_rel=healthy_unofficial_rel,
                            ro=rugged_official, ru=rugged_unofficial, ro_rel=rugged_official_rel, ru_rel=rugged_unofficial_rel,
                            to=total_official, tu=total_unofficial, unofficial=unofficial)
+
+
+@app.route("/view/", methods=["POST", "GET"])
+def view():
+    return render_template("view.html")
 
 
 if __name__ == "__main__":

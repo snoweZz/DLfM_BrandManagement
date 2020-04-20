@@ -17,9 +17,7 @@ html, body{
 .middle{
     height: 70%;
 }
-.form{
-    padding-top: 15%;
-}
+
 .form-control{
     opacity: 0.5;
     margin: 1%;
@@ -59,3 +57,11 @@ h1{
     padding-top: 2.5%;
     color: #f0ad0d;
 }
+
+#view{
+    height: 50%;
+    width: 25%;
+    margin-top: 2.5%;
+}
+
+/* for the view page */
