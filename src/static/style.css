@@ -17,9 +17,11 @@ html, body{
 .middle{
     height: 70%;
 }
+
 .form{
-    padding-top: 15%;
+    padding-top: 20%;
 }
+
 .form-control{
     opacity: 0.5;
     margin: 1%;
@@ -59,3 +61,5 @@ h1{
     padding-top: 2.5%;
     color: #f0ad0d;
 }
+
+
