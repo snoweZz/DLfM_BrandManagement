@@ -18,6 +18,10 @@ html, body{
     height: 70%;
 }
 
+.form{
+    padding-top: 20%;
+}
+
 .form-control{
     opacity: 0.5;
     margin: 1%;
@@ -58,10 +62,4 @@ h1{
     color: #f0ad0d;
 }
 
-#view{
-    height: 50%;
-    width: 25%;
-    margin-top: 2.5%;
-}
 
-/* for the view page */

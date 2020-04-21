@@ -61,9 +61,11 @@ def official(user_name, password, LIMIT_IMAGE_COUNT, USERNAME):
             len(posts['items'])
             image_urls = []
             for i in range(len(posts['items'])):
-                #print('posts[items]: {}'.format(posts['items']))
-                url = posts['items'][i]['image_versions2']['candidates'][0]['url']
-                image_urls.append(url)
+                try:
+                    url = posts['items'][i]['image_versions2']['candidates'][0]['url']
+                    image_urls.append(url)
+                except:
+                    pass
             # Extract the value *next_max_id* from the above response, this is needed to load the next 12 posts
             next_max_id = posts["next_max_id"]
             all_image_posts_urls.append(image_urls)

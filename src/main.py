@@ -19,10 +19,10 @@ graph = tf.get_default_graph()
 set_session(sess)
 num_attributes = 4
 model = [[] for i in range(num_attributes)]
-model[0] = load_model('./model/savemodels/glamorous_model.h5')
-model[1] = load_model('./model/savemodels/rugged_model.h5')
-model[2] = load_model('./model/savemodels/fun_model.h5')
-model[3] = load_model('./model/savemodels/healthy_model.h5')
+model[0] = load_model('./model/augmented/glamarous_model.h5')
+model[1] = load_model('./model/augmented/rugged_model.h5')
+model[2] = load_model('./model/augmented/fun_model.h5')
+model[3] = load_model('./model/augmented/healthy_model.h5')
 
 
 app = Flask(__name__)
@@ -36,7 +36,7 @@ def data_collection(official, unofficial):
     #url_unofficial = unofficial #'https://www.instagram.com/explore/tags/'+unofficial+''
 
     # specify number of images to retrieve
-    LIMIT_IMAGE_COUNT = 72
+    LIMIT_IMAGE_COUNT = 36
     # specify your 'personal' instagram page, needed to get access to the API
     user_name = 'chenpeling@hotmail.com'
     password = 'Instagram2020'
@@ -128,11 +128,6 @@ def predict():
                            ho=healthy_official, hu=healthy_unofficial, ho_rel=healthy_official_rel, hu_rel=healthy_unofficial_rel,
                            ro=rugged_official, ru=rugged_unofficial, ro_rel=rugged_official_rel, ru_rel=rugged_unofficial_rel,
                            to=total_official, tu=total_unofficial, unofficial=unofficial)
-
-
-@app.route("/view/", methods=["POST", "GET"])
-def view():
-    return render_template("view.html")
 
 
 if __name__ == "__main__":
