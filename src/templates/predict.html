@@ -8,9 +8,80 @@
 </head>
 
 <body>
-   <h1>{{prediction}}</h1>
-
-
+    <div class="container-fluid">
+        <div class="row top">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8"><h1>{{unofficial}} brand analysis</h1></div>
+            <div class="col-sm-2"></div>
+        </div>
+        <div class="row middle">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+                <table class=" table table-dark absolute">
+                    <thead>
+                        <tr>
+                            <th scope="col">absolute</th>
+                            <th scope="col">fun</th>
+                            <th scope="col">glamorous</th>
+                            <th scope="col">healthy</th>
+                            <th scope="col">rugged</th>
+                            <th scope="col">total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th class="align-middle" scope="row">official</th>
+                            <td class="align-middle">{{fo}}</td>
+                            <td class="align-middle">{{go}}</td>
+                            <td class="align-middle">{{ho}}</td>
+                            <td class="align-middle">{{ro}}</td>
+                            <td class="align-middle">{{to}}</td>
+                        </tr>
+                        <tr>
+                            <th class="align-middle" scope="row">unofficial</th>
+                            <td class="align-middle">{{fu}}</td>
+                            <td class="align-middle">{{gu}}</td>
+                            <td class="align-middle">{{hu}}</td>
+                            <td class="align-middle">{{ru}}</td>
+                            <td class="align-middle">{{tu}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class=" table table-dark relative">
+                    <thead>
+                        <tr>
+                            <th scope="col">relative</th>
+                            <th scope="col">fun</th>
+                            <th scope="col">glamorous</th>
+                            <th scope="col">healthy</th>
+                            <th scope="col">rugged</th>
+                            <th scope="col">total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th class="align-middle" scope="row">official</th>
+                            <td class="align-middle">{{fo_rel}}%</td>
+                            <td class="align-middle">{{go_rel}}%</td>
+                            <td class="align-middle">{{ho_rel}}%</td>
+                            <td class="align-middle">{{ro_rel}}%</td>
+                            <td class="align-middle">100%</td>
+                        </tr>
+                        <tr>
+                            <th class="align-middle" scope="row">unofficial</th>
+                            <td class="align-middle">{{fu_rel}}%</td>
+                            <td class="align-middle">{{gu_rel}}%</td>
+                            <td class="align-middle">{{hu_rel}}%</td>
+                            <td class="align-middle">{{ru_rel}}%</td>
+                            <td class="align-middle">100%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+        <div class="row bottom"></div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
