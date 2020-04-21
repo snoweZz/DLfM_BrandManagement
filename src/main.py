@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 import pandas as pd
 import tensorflow as tf
 from keras.models import load_model
@@ -7,7 +7,9 @@ from src.utils import instagram_scraper
 from src.utils import image_preprocessing
 from src.utils import label_encoding
 from src.utils import overall_class_label
+from src.utils import infinite_scraper
 from sklearn.preprocessing import LabelEncoder
+from PIL import Image
 
 # sessions and default graphs are needed to make tensorflow work properly
 global sess
@@ -17,10 +19,10 @@ graph = tf.get_default_graph()
 set_session(sess)
 num_attributes = 4
 model = [[] for i in range(num_attributes)]
-model[0] = load_model('../model/savemodels/glamorous_model.h5')
-model[1] = load_model('../model/savemodels/rugged_model.h5')
-model[2] = load_model('../model/savemodels/fun_model.h5')
-model[3] = load_model('../model/savemodels/healthy_model.h5')
+model[0] = load_model('./model/augmented/glamarous_model.h5')
+model[1] = load_model('./model/augmented/rugged_model.h5')
+model[2] = load_model('./model/augmented/fun_model.h5')
+model[3] = load_model('./model/augmented/healthy_model.h5')
 
 
 app = Flask(__name__)
@@ -30,11 +32,20 @@ app = Flask(__name__)
 # url_official is the official instagram page url of the brand to be analysed
 # url_unofficial is the hashtag instagram page url we want to compare to the official page
 def data_collection(official, unofficial):
-    url_official = official
-    url_unofficial = 'https://www.instagram.com/explore/tags/'+unofficial+''
-    scraper = instagram_scraper.InstagramScraper()
-    official_images = scraper.profile_page_posts(url_official)
-    unofficial_images = scraper.hashtag_page_posts(url_unofficial)
+    #url_official = official #official
+    #url_unofficial = unofficial #'https://www.instagram.com/explore/tags/'+unofficial+''
+
+    # specify number of images to retrieve
+    LIMIT_IMAGE_COUNT = 36
+    # specify your 'personal' instagram page, needed to get access to the API
+    user_name = 'chenpeling@hotmail.com'
+    password = 'Instagram2020'
+    official_images = infinite_scraper.official(user_name, password, LIMIT_IMAGE_COUNT, official)
+    unofficial_images = infinite_scraper.unofficial(user_name, password, LIMIT_IMAGE_COUNT, unofficial)
+
+    #scraper = instagram_scraper.InstagramScraper()
+    #official_images = scraper.profile_page_posts(url_official)
+    #unofficial_images = scraper.hashtag_page_posts(url_unofficial)
     return official_images, unofficial_images
 
 
