@@ -1,4 +1,8 @@
-from instagram_private_api import Client, ClientCompatPatch
+from instagram_private_api import Client
+
+# both functions retrieve images from the specified Instagram pages
+# either for the official or the unofficial account of the brand
+# they return a list of image URLs
 
 
 def unofficial(user_name, password, LIMIT_IMAGE_COUNT, HASHTAG):
@@ -45,8 +49,6 @@ def unofficial(user_name, password, LIMIT_IMAGE_COUNT, HASHTAG):
     return flat_hash_image_posts_urls
 
 
-
-
 def official(user_name, password, LIMIT_IMAGE_COUNT, USERNAME):
     api = Client(user_name, password)
 
@@ -57,7 +59,6 @@ def official(user_name, password, LIMIT_IMAGE_COUNT, USERNAME):
         if next_max_id == None:
             # Gets the first 12 posts
             posts = api.username_feed(USERNAME)
-            #print('posts: {}'.format(posts))
             len(posts['items'])
             image_urls = []
             for i in range(len(posts['items'])):
