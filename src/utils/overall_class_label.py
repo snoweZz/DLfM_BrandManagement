@@ -1,6 +1,6 @@
 import numpy as np
 
-
+# this function takes the four predictions of an image (one for each model) and returns the max as final prediction
 def give_ovr_class_label_output(y_pred):
     '''
     Stack 4 probabilities to get a numpy array

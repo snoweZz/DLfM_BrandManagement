@@ -1,11 +1,11 @@
-import os
 from random import choice
-import csv
 import json
 from bs4 import BeautifulSoup
 import requests
-import pandas as pd
 
+# this file is not used in the current pipeline
+# is only capable of retrieving the images displayed on the first page (without scrolling)
+# the current pipeline uses the infinite_scraper file which is based on Instagram's private API
 
 headers={'User-Agent':  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36'
          ,  'content-type': 'application/json'
@@ -59,18 +59,9 @@ class InstagramScraper:
         soup = BeautifulSoup(html, 'html.parser')
         body = soup.find('body')
         script_tag = body.find('script')
-        # pprint(script_tag)
-        # print('\n')
-        # pprint(type(script_tag))
-        content = script_tag.contents  # .strip().replace('window._sharedData =', '').replace(';', '')
-        #######
+        content = script_tag.contents
         content_string = ''.join(content)
         raw_string = content_string.strip().replace('window._sharedData =', '').replace(';', '')
-        #######
-        # print('\n')
-        # pprint(raw_string)
-        # print('\n')
-        # pprint(type(raw_string))
         return json.loads(raw_string)
 
     def profile_page_metrics(self, profile_url):
@@ -83,7 +74,6 @@ class InstagramScraper:
             raise e
         else:
             for key, value in metrics.items():
-                # print('key:', key, '-value:', value)
                 if key != 'edge_owner_to_timeline_media':
                     if value and isinstance(value, dict):
                         value = value['count']
@@ -103,7 +93,6 @@ class InstagramScraper:
             raise e
         else:
             for key, value in metrics.items():
-                # print('metrics:', metrics)
                 if key != 'edge_hashtag_to_media' and key != 'edge_hashtag_to_top_posts' and key != 'profile_pic_url':
                     results[key] = value
                     if value and isinstance(value, dict):
@@ -115,13 +104,10 @@ class InstagramScraper:
                         try:
                             sigma = []
                             for i in range(0, 5):
-                                # print(i)
                                 value = value['edges'][i]['node']['name']
-                                # print(i)
                             sigma.append(value)
                             print(len(value['edges']['node']))
 
-                            # results[key] = sigma
                         except:
                             results[key] = value
                     elif value:
@@ -132,12 +118,9 @@ class InstagramScraper:
         results = []
         try:
             response = self.__request_url(profile_url)
-            # pprint(response)
             json_data = self.extract_json_data(response)
-            # pprint(json_data)
             metrics = json_data['entry_data']['ProfilePage'][0]['graphql']['user']['edge_owner_to_timeline_media'][
                 "edges"]
-            # pprint(metrics)
         except Exception as e:
             raise e
         else:
@@ -152,9 +135,7 @@ class InstagramScraper:
         try:
             response = self.__request_url(hashtag_url)
             json_data = self.extract_json_data(response)
-            # pprint(json_data)
             metrics = json_data['entry_data']['TagPage'][0]['graphql']['hashtag']['edge_hashtag_to_media']["edges"]
-            # pprint(metrics)
         except Exception as e:
             raise e
         else:
