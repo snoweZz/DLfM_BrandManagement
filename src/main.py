@@ -1,15 +1,10 @@
-from flask import Flask, render_template, request, redirect, url_for, session
-import pandas as pd
+from flask import Flask, render_template, request, redirect, url_for
 import tensorflow as tf
 from keras.models import load_model
 from keras.backend import set_session
-from src.utils import instagram_scraper
 from src.utils import image_preprocessing
-from src.utils import label_encoding
 from src.utils import overall_class_label
 from src.utils import infinite_scraper
-from sklearn.preprocessing import LabelEncoder
-from PIL import Image
 
 # sessions and default graphs are needed to make tensorflow work properly
 global sess
@@ -28,24 +23,20 @@ model[3] = load_model('./model/augmented/healthy_model.h5')
 app = Flask(__name__)
 
 
-# this function collects images from the user specified instagram page and hashtag respectively
-# url_official is the official instagram page url of the brand to be analysed
-# url_unofficial is the hashtag instagram page url we want to compare to the official page
+# this function collects images from the official and the unofficial (hashtag) page
 def data_collection(official, unofficial):
-    #url_official = official #official
-    #url_unofficial = unofficial #'https://www.instagram.com/explore/tags/'+unofficial+''
-
     # specify number of images to retrieve
+    # Note: you do not retrieve exactly 36 images but 36 + the last batch
     LIMIT_IMAGE_COUNT = 36
+
     # specify your 'personal' instagram page, needed to get access to the API
+    # Note: Instagram will block access to their API when you retrieve too many images within a short amount of time
     user_name = 'chenpeling@hotmail.com'
     password = 'Instagram2020'
+
+    # retrieve lists of URLs for both the official and unofficial account
     official_images = infinite_scraper.official(user_name, password, LIMIT_IMAGE_COUNT, official)
     unofficial_images = infinite_scraper.unofficial(user_name, password, LIMIT_IMAGE_COUNT, unofficial)
-
-    #scraper = instagram_scraper.InstagramScraper()
-    #official_images = scraper.profile_page_posts(url_official)
-    #unofficial_images = scraper.hashtag_page_posts(url_unofficial)
     return official_images, unofficial_images
 
 
@@ -58,7 +49,7 @@ def data_preprocessing(official_images, unofficial_images):
 
 
 # this function takes the preprocessed images and feeds them into the pretrained models
-# as output we get a list with the predicted label for each image
+# as output we get a list with the predicted labels
 def make_prediction(preprocessed_data):
     X_test = preprocessed_data
 
@@ -93,6 +84,7 @@ def index():
 
 
 # the page the user gets redirected to after hitting the 'Predict' button on the homepage
+# Note: the entire pipeline takes a couple of minutes since we feed every picture in each of the four models
 @app.route("/predict/", methods=["POST", "GET"])
 def predict():
     official = request.args.get('official')

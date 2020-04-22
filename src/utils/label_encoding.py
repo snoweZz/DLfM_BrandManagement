@@ -1,5 +1,7 @@
 import numpy as np
 
+# this file is not used in the current pipeline
+
 def probabilty_to_classencoding(y_pred):
     """
     Output of softmax is probability distribution,
