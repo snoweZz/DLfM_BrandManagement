@@ -23,6 +23,3 @@ Contains all relevant scripts for:
 
 ### about_me
 Contains relevant papers and documents to further facilitate project understanding
-
-### about_other_project
-Contains sample code from the original study
