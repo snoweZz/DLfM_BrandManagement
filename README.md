@@ -1,5 +1,5 @@
 # DLfM Group Project: Brand Management
-Authors:
+Authors:<br>
 Linda Samsinger<br>
 Theebana Rajendram<br>
 Neeraj Kumar<br>
